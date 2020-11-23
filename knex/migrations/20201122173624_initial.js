@@ -19,7 +19,28 @@ exports.up = function (knex) {
       table.string("name").notNullable();
       table.integer("cost").notNullable();
       table.integer("units_per_box").notNullable();
+    })
 
+    .createTable("fares", function (table) {
+      table
+        .integer("product_id")
+        .unsigned()
+        .references("id")
+        .inTable("products")
+        .onDelete("CASCADE");
+      table
+        .integer("customer_id")
+        .unsigned()
+        .references("id")
+        .inTable("products")
+        .onDelete("CASCADE");
+      table.string("price_1");
+      table.string("price_2");
+      table.string("price_3");
+      table.string("price_4");
+      table.integer("to_sell");
+      table.integer("to_charge");
+      table.integer("green_point_amount").defaultTo(0);
     })
 
     .createTable("orders", function (table) {
@@ -37,7 +58,8 @@ exports.up = function (knex) {
         .integer("customer_id")
         .unsigned()
         .references("id")
-        .inTable("customers").onDelete('CASCADE');
+        .inTable("customers")
+        .onDelete("CASCADE");
     });
 };
 
