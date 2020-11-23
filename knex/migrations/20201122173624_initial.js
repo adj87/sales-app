@@ -14,6 +14,14 @@ exports.up = function (knex) {
       table.timestamp("updated_at").defaultTo(knex.fn.now());
     })
 
+    .createTable("products", function (table) {
+      table.increments("id");
+      table.string("name").notNullable();
+      table.integer("cost").notNullable();
+      table.integer("units_per_box").notNullable();
+
+    })
+
     .createTable("orders", function (table) {
       table.increments("id");
       table.string("customer_name");
@@ -21,6 +29,9 @@ exports.up = function (knex) {
       table.string("fiscal_id").notNullable();
       table.string("zip_code").notNullable();
       table.string("date").notNullable();
+      table.string("delivery_date").notNullable();
+      table.string("delivery_date").notNullable();
+      table.string("delivery_date").notNullable();
       table.string("delivery_date").notNullable();
       table
         .integer("customer_id")
