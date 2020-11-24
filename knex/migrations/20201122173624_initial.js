@@ -19,6 +19,7 @@ exports.up = function (knex) {
       table.string("name").notNullable();
       table.integer("cost").notNullable();
       table.integer("units_per_box").notNullable();
+      table.float("capacity");
     })
 
     .createTable("fares", function (table) {
@@ -51,9 +52,9 @@ exports.up = function (knex) {
       table.string("zip_code").notNullable();
       table.string("date").notNullable();
       table.string("delivery_date").notNullable();
-      table.string("delivery_date").notNullable();
-      table.string("delivery_date").notNullable();
-      table.string("delivery_date").notNullable();
+      table.float("total_net");
+      table.float("total_taxes");
+      table.float("total");
       table
         .integer("customer_id")
         .unsigned()
@@ -64,5 +65,9 @@ exports.up = function (knex) {
 };
 
 exports.down = function (knex) {
-  return knex.schema.dropTable("orders").dropTable("customers");
+  return knex.schema
+    .dropTable("orders")
+    .dropTable("customers")
+    .dropTable("products")
+    .dropTable("fares");
 };
