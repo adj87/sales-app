@@ -9,7 +9,7 @@ exports.up = function (knex) {
       table.string("email");
       table.string("phone");
       table.boolean("green_point").defaultTo(true);
-      table.boolean("surcharge").defaultTo(true);
+      table.boolean("surcharge").defaultTo(false);
       table.timestamp("created_at").defaultTo(knex.fn.now());
       table.timestamp("updated_at").defaultTo(knex.fn.now());
     })
@@ -46,28 +46,50 @@ exports.up = function (knex) {
 
     .createTable("orders", function (table) {
       table.increments("id");
-      table.string("customer_name");
       table.string("address").notNullable();
       table.string("fiscal_id").notNullable();
       table.string("zip_code").notNullable();
-      table.string("date").notNullable();
-      table.string("delivery_date").notNullable();
+      table.date("date").notNullable();
+      table.date("delivery_date").notNullable();
       table.float("total_net");
       table.float("total_taxes");
       table.float("total");
+      table.boolean("surcharge").defaultTo(false);
       table
         .integer("customer_id")
         .unsigned()
         .references("id")
         .inTable("customers")
         .onDelete("CASCADE");
+      table.string("customer_name");
+      table.boolean("green_point").notNullable();
+      table.integer("customer_route_id");
+      table.enu("type", ["A", "B", "C"]).defaultTo("A");
+    })
+
+    .createTable("orders_lines", function (table) {
+      table.integer("line_number");
+      table
+        .integer("product_id")
+        .unsigned()
+        .references("id")
+        .inTable("products")
+        .onDelete("CASCADE");
+      table.integer("product_name");
+      table.integer("units_per_box").notNullable();
+      table.float("price");
+      table.float("cost");
+      table.integer("quantity");
+      table.float("taxes_rate");
+      table.float("surcharge_amount");
+      table.float("green_point_amount");
     });
 };
 
 exports.down = function (knex) {
   return knex.schema
     .dropTable("orders")
-    .dropTable("customers")
     .dropTable("products")
-    .dropTable("fares");
+    .dropTable("fares")
+    .dropTable("customers");
 };
