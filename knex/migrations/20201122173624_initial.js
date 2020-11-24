@@ -88,8 +88,9 @@ exports.up = function (knex) {
 
 exports.down = function (knex) {
   return knex.schema
+    .dropTable("fares")
+    .dropTable("orders_lines")
     .dropTable("orders")
     .dropTable("products")
-    .dropTable("fares")
     .dropTable("customers");
 };
