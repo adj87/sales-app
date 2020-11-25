@@ -25,7 +25,7 @@ exports.seed = function (knex, Promise) {
             cost,
             quantity,
             taxes_rate: order.type === "A" ? 21 : 0,
-            surcharge_amount: order.surcharge ? 0.052 * price : 0,
+            surcharge_amount: order.surcharge ? 5.2 : 0,
             green_point_amount: order.green_point
               ? randomProduct.green_point_amount
               : 0,
