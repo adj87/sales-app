@@ -6,14 +6,15 @@ exports.seed = function (knex, Promise) {
 
   return knex("orders").then((orders) => {
     return knex("products").then((products) => {
+      const ordersLines = [];
       orders.forEach((order) => {
         for (var i = 0; i < numberOfOrdersLines; i++) {
           const randomProduct = utils.getRandomItemOfArray(products);
-          const price = faker.random.float(2);
-          const cost = faker.random.float(price);
+          const price = faker.random.float(0.5);
+          const cost = price / 2;
           const units_per_box = randomProduct.units_per_box;
           const quantity = faker.random.number(20);
-          const orderLine = {
+          ordersLines.push({
             order_id: order.id,
             order_type: order.type,
             line_number: i + 1,
@@ -28,11 +29,10 @@ exports.seed = function (knex, Promise) {
             green_point_amount: order.green_point
               ? randomProduct.green_point_amount
               : 0,
-          };
-          console.log(`${i}-${JSON.stringify(orderLine)}`);
-          return knex("orders_lines").insert(orderLine);
+          });
         }
       });
+      return knex("orders_lines").insert(ordersLines);
     });
   });
 };
