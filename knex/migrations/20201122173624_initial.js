@@ -18,6 +18,7 @@ exports.up = function (knex) {
       table.increments("id");
       table.string("name").notNullable();
       table.integer("cost").notNullable();
+      table.float("green_point_amount").notNullable();
       table.integer("units_per_box").notNullable();
       table.float("capacity");
     })
@@ -68,6 +69,8 @@ exports.up = function (knex) {
     })
 
     .createTable("orders_lines", function (table) {
+      table.integer("order_id");
+      table.enu("order_type", ["A", "B", "C"]).defaultTo("A");
       table.integer("line_number");
       table
         .integer("product_id")
@@ -80,7 +83,7 @@ exports.up = function (knex) {
       table.float("price");
       table.float("cost");
       table.integer("quantity");
-      table.float("taxes_rate");
+      table.integer("taxes_rate");
       table.float("surcharge_amount");
       table.float("green_point_amount");
     });

@@ -2,7 +2,7 @@ const faker = require("faker");
 escape_quotes = require("escape-quotes");
 exports.seed = function (knex, Promise) {
   let orders = [];
-  const numberOfRegisters = 50;
+  const numberOfRegisters = 1;
 
   return knex("customers").then((customers) => {
     const customersLength = customers.length;
