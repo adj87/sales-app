@@ -66,6 +66,7 @@ exports.up = function (knex) {
       table.boolean("green_point").notNullable();
       table.integer("customer_route_id");
       table.enu("type", ["A", "B", "C"]).defaultTo("A");
+      table.boolean("show_together_with_others").defaultTo(false);
     })
 
     .createTable("orders_lines", function (table) {
