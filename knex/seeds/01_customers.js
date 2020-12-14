@@ -3,7 +3,7 @@ escape_quotes = require("escape-quotes");
 
 exports.seed = function (knex, Promise) {
   let customers = [];
-  const numberOfRegisters = 1000;
+  const numberOfRegisters = 60;
   for (var i = 0; i < numberOfRegisters; i++) {
     customers.push({
       id: i + 1,
