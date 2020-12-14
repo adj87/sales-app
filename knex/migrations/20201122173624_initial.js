@@ -34,10 +34,10 @@ exports.up = function (knex) {
         .integer("customer_id")
         .unsigned()
         .references("id")
-        .inTable("products")
+        .inTable("customers")
         .onDelete("CASCADE");
-      table.string("customer_name");
 
+      table.string("customer_name");
       table.string("price_1");
       table.string("price_2");
       table.string("price_3");
