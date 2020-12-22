@@ -19,5 +19,18 @@ exports.seed = function (knex, Promise) {
       updated_at: faker.date.soon(),
     });
   }
+  customers.push({
+    id: 1001,
+    name: "REPARTO",
+    address: escape_quotes(faker.address.city()),
+    fiscal_id: faker.random.number().toString(),
+    zip_code: faker.address.zipCode(),
+    email: faker.internet.email(),
+    phone: faker.phone.phoneNumber(),
+    green_point: faker.random.boolean(),
+    surcharge: faker.random.boolean(),
+    created_at: faker.date.past(),
+    updated_at: faker.date.soon(),
+  });
   return knex("customers").insert(customers);
 };
