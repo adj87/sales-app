@@ -10,8 +10,8 @@ exports.seed = function (knex, Promise) {
       orders.forEach((order) => {
         for (var i = 0; i < numberOfOrdersLines; i++) {
           const randomProduct = utils.getRandomItemOfArray(products);
-          const price = faker.random.float(0.5);
-          const cost = price / 2;
+          const price = Math.round(Math.random() * 2 * 100) / 100;
+          const cost = Math.round((price / 2) * 100) / 100;
           const units_per_box = randomProduct.units_per_box;
           const quantity = faker.random.number(20);
           ordersLines.push({

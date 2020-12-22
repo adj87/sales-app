@@ -38,10 +38,10 @@ exports.up = function (knex) {
         .onDelete("CASCADE");
 
       table.string("customer_name");
-      table.string("price_1");
-      table.string("price_2");
-      table.string("price_3");
-      table.string("price_4");
+      table.float("price_1");
+      table.float("price_2");
+      table.float("price_3");
+      table.float("price_4");
       table.integer("to_sell");
       table.integer("to_charge");
       table.integer("green_point_amount").defaultTo(0);

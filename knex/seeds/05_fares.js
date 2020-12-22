@@ -18,16 +18,30 @@ exports.seed = function (knex, Promise) {
               customer_id: customer.id,
               customer_name: customer.name,
               product_id: randomProduct.id,
-              price_1: faker.random.number(3),
-              price_2: faker.random.number(3),
-              price_3: faker.random.number(3),
-              price_4: faker.random.number(3),
+              price_1: faker.random.number(3) + 1,
+              price_2: faker.random.number(3) + 1,
+              price_3: faker.random.number(3) + 1,
+              price_4: faker.random.number(3) + 1,
               to_sell: 6,
               to_charge: 5,
             });
           }
         }
       });
+      products.forEach((el) => {
+        fares.push({
+          customer_id: 1001,
+          customer_name: "REPARTO",
+          product_id: el.id,
+          price_1: Math.round(Math.random() * 2 * 100) / 100,
+          price_2: faker.random.number(3) + 1,
+          price_3: faker.random.number(3) + 1,
+          price_4: faker.random.number(3) + 1,
+          to_sell: 6,
+          to_charge: 5,
+        });
+      });
+
       return knex("fares").insert(fares);
     });
   });
