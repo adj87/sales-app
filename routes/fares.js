@@ -16,11 +16,20 @@ router.get("/", function (req, res, next) {
 /* GET fares listing by customerId */
 router.get("/:customerId", function (req, res, next) {
   const { customerId } = req.params;
+  const customer_id = parseInt(customerId);
   knex
     .select("*")
     .from("fares")
-    .where({ customer_id: parseInt(customerId) })
-    .then((data) => res.json(data))
+    .whereIn("customer_id", [customerId, 1001])
+    .then((data) => {
+      const ownFare = Boolean(data.find((el) => el.customer_id == customer_id));
+      if (ownFare) {
+        const newData = data.filter((el) => el.customer_id === customer_id);
+        return res.json(newData);
+      } else {
+        return res.json(data);
+      }
+    })
     .catch((err) => {
       res.status(500).json({ error: err });
     });
