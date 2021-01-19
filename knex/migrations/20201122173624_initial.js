@@ -37,6 +37,7 @@ exports.up = function (knex) {
         .inTable("customers")
         .onDelete("CASCADE");
 
+      table.string("product_name");
       table.string("customer_name");
       table.float("price_1");
       table.float("price_2");
