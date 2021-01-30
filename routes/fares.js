@@ -35,4 +35,25 @@ router.get("/:customerId", function (req, res, next) {
     });
 });
 
+router.post("/", (req, res, next) => {
+  return knex("fares")
+    .insert(req.body.fare_lines)
+    .then((data) => {
+      console.log("aqui la tienes", data);
+      return res.json({ success: true, data: req.body });
+    })
+    .catch((err) => console.log("el err", err));
+});
+
+router.put("/:customerId", (req, res, next) => {
+  const { customerId } = req.params;
+  console.log(req);
+  knex("fares")
+    .where("customer_id", customerId)
+    .del()
+    .then(() => {
+      knex("fares").insert();
+    });
+});
+
 module.exports = router;
