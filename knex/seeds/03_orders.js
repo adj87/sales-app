@@ -20,10 +20,11 @@ exports.seed = function (knex, Promise) {
         date: faker.date.past(),
         delivery_date: faker.date.soon(),
         total_net: 5 * i,
+        total_recharge: 5 * i,
         total_taxes: 5 * i * 0.21,
         total: 5 * i * 1.21,
-        surcharge: faker.random.boolean(),
-        green_point: randomCustomer.green_point,
+        is_surcharge: faker.random.boolean(),
+        is_green_point: randomCustomer.green_point,
         customer_route_id: faker.random.number(6),
         type: faker.random.arrayElements[("A", "B")],
       });

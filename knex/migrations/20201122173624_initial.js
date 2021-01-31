@@ -56,9 +56,10 @@ exports.up = function (knex) {
       table.date("date").notNullable();
       table.date("delivery_date").notNullable();
       table.float("total_net");
+      table.float("total_recharge");
       table.float("total_taxes");
       table.float("total");
-      table.boolean("surcharge").defaultTo(false);
+      table.boolean("is_surcharge").defaultTo(false);
       table
         .integer("customer_id")
         .unsigned()
@@ -66,7 +67,7 @@ exports.up = function (knex) {
         .inTable("customers")
         .onDelete("CASCADE");
       table.string("customer_name");
-      table.boolean("green_point").notNullable();
+      table.boolean("is_green_point").notNullable();
       table.integer("customer_route_id");
       table.enu("type", ["A", "B", "C"]).defaultTo("A");
       table.boolean("show_together_with_others").defaultTo(false);
