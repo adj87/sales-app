@@ -39,25 +39,25 @@ router.get("/:orderId/type/:orderType", function (req, res, next) {
 router.post("/", function (req, res, next) {
   const { body } = req;
   let { order_lines, id, ...order } = body;
-  return knex("orders")
-    .insert(order)
-    .then((id) => {
-      order_lines = order_lines.map((el) => ({
-        ...el,
-        order_id: id,
-        order_type: order.type,
-      }));
-      return knex("order_lines")
-        .insert(order_lines)
-        .then(() => res.send({ success: true }))
-        .catch((e) => {
-          console.log(e);
-          res.json({ success: false });
+
+  knex
+    .transaction(function (trx) {
+      return trx("orders")
+        .insert(order)
+        .then((id) => {
+          order_lines = order_lines.map((el) => ({
+            ...el,
+            order_id: id,
+            order_type: order.type,
+          }));
+          return trx("order_lines").insert(order_lines);
         });
     })
-    .catch((e) => {
-      console.log(e);
-      res.json({ success: false });
+    .then(function () {
+      res.send({ success: true });
+    })
+    .catch(function (e) {
+      res.status(500).json({ success: false });
     });
 });
 
