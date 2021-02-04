@@ -8,8 +8,8 @@ exports.up = function (knex) {
       table.string("zip_code").notNullable();
       table.string("email");
       table.string("phone");
-      table.boolean("green_point").defaultTo(true);
-      table.boolean("surcharge").defaultTo(false);
+      table.boolean("is_green_point").defaultTo(true);
+      table.boolean("is_surcharge").defaultTo(false);
       table.timestamp("created_at").defaultTo(knex.fn.now());
       table.timestamp("updated_at").defaultTo(knex.fn.now());
     })

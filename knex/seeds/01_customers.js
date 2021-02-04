@@ -13,8 +13,8 @@ exports.seed = function (knex, Promise) {
       zip_code: faker.address.zipCode(),
       email: faker.internet.email(),
       phone: faker.phone.phoneNumber(),
-      green_point: faker.random.boolean(),
-      surcharge: faker.random.boolean(),
+      is_green_point: faker.random.boolean(),
+      is_surcharge: faker.random.boolean(),
       created_at: faker.date.past(),
       updated_at: faker.date.soon(),
     });
@@ -27,8 +27,8 @@ exports.seed = function (knex, Promise) {
     zip_code: faker.address.zipCode(),
     email: faker.internet.email(),
     phone: faker.phone.phoneNumber(),
-    green_point: faker.random.boolean(),
-    surcharge: faker.random.boolean(),
+    is_green_point: faker.random.boolean(),
+    is_surcharge: faker.random.boolean(),
     created_at: faker.date.past(),
     updated_at: faker.date.soon(),
   });
