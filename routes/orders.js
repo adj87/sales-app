@@ -25,7 +25,7 @@ router.get("/:orderId/type/:orderType", function (req, res, next) {
     .then((orders) => {
       knex
         .select("*")
-        .from("orders_lines")
+        .from("order_lines")
         .where({ order_id: orderId, order_type: orderType })
         .then((order_lines) => {
           const ordersWithOrderLines = { ...orders, order_lines };
@@ -34,6 +34,31 @@ router.get("/:orderId/type/:orderType", function (req, res, next) {
         .catch((err) => res.status(500).json({ error: err.sqlMessage }));
     })
     .catch((err) => res.status(500).json({ error: err.sqlMessage }));
+});
+
+router.post("/", function (req, res, next) {
+  const { body } = req;
+  let { order_lines, id, ...order } = body;
+  return knex("orders")
+    .insert(order)
+    .then((id) => {
+      order_lines = order_lines.map((el) => ({
+        ...el,
+        order_id: id,
+        order_type: order.type,
+      }));
+      return knex("order_lines")
+        .insert(order_lines)
+        .then(() => res.send({ success: true }))
+        .catch((e) => {
+          console.log(e);
+          res.json({ success: false });
+        });
+    })
+    .catch((e) => {
+      console.log(e);
+      res.json({ success: false });
+    });
 });
 
 module.exports = router;

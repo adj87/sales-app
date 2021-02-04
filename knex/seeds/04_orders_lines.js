@@ -20,19 +20,20 @@ exports.seed = function (knex, Promise) {
             line_number: i + 1,
             product_id: randomProduct.id,
             product_name: randomProduct.name,
+            capacity:randomProduct.capacity,
             units_per_box,
             price,
             cost,
             quantity,
             taxes_rate: order.type === "A" ? 21 : 0,
-            surcharge_amount: order.surcharge ? 5.2 : 0,
-            green_point_amount: order.green_point
+            surcharge_amount: order.is_surcharge ? 5.2 : 0,
+            green_point_amount: order.is_green_point
               ? randomProduct.green_point_amount
               : 0,
           });
         }
       });
-      return knex("orders_lines").insert(ordersLines);
+      return knex("order_lines").insert(ordersLines);
     });
   });
 };

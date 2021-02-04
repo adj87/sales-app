@@ -51,12 +51,13 @@ exports.up = function (knex) {
     .createTable("orders", function (table) {
       table.increments("id");
       table.string("address").notNullable();
+      table.string("shipping_place");
       table.string("fiscal_id").notNullable();
       table.string("zip_code").notNullable();
-      table.date("date").notNullable();
-      table.date("delivery_date").notNullable();
+      table.date("date");
+      table.date("delivery_date");
       table.float("total_net");
-      table.float("total_recharge");
+      table.float("total_surcharge");
       table.float("total_taxes");
       table.float("total");
       table.boolean("is_surcharge").defaultTo(false);
@@ -73,7 +74,7 @@ exports.up = function (knex) {
       table.boolean("show_together_with_others").defaultTo(false);
     })
 
-    .createTable("orders_lines", function (table) {
+    .createTable("order_lines", function (table) {
       table.integer("order_id");
       table.enu("order_type", ["A", "B", "C"]).defaultTo("A");
       table.integer("line_number");
@@ -85,6 +86,7 @@ exports.up = function (knex) {
         .onDelete("CASCADE");
       table.string("product_name");
       table.integer("units_per_box").notNullable();
+      table.integer("capacity").notNullable();
       table.float("price");
       table.float("cost");
       table.integer("quantity");
@@ -97,7 +99,7 @@ exports.up = function (knex) {
 exports.down = function (knex) {
   return knex.schema
     .dropTable("fares")
-    .dropTable("orders_lines")
+    .dropTable("order_lines")
     .dropTable("orders")
     .dropTable("products")
     .dropTable("customers");

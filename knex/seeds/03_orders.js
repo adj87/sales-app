@@ -2,7 +2,7 @@ const faker = require("faker");
 escape_quotes = require("escape-quotes");
 exports.seed = function (knex, Promise) {
   let orders = [];
-  const numberOfRegisters = 2500;
+  const numberOfRegisters = 2;
 
   return knex("customers").then((customers) => {
     const customersLength = customers.length;
@@ -20,7 +20,7 @@ exports.seed = function (knex, Promise) {
         date: faker.date.past(),
         delivery_date: faker.date.soon(),
         total_net: 5 * i,
-        total_recharge: 5 * i,
+        total_surcharge: 5 * i,
         total_taxes: 5 * i * 0.21,
         total: 5 * i * 1.21,
         is_surcharge: faker.random.boolean(),

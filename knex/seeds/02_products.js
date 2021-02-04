@@ -1,3 +1,4 @@
+const faker = require("faker");
 escape_quotes = require("escape-quotes");
 
 exports.seed = function (knex, Promise) {
@@ -8,9 +9,9 @@ exports.seed = function (knex, Promise) {
       id: i + 1,
       name: `Producto ${i}`,
       cost: 0.12,
-      green_point_amount: 0.0125,
-      units_per_box: 12,
-      capacity: 2,
+      green_point_amount: (faker.random.number(20) + 1) / 100,
+      units_per_box: faker.random.number(19) + 1,
+      capacity: faker.random.number(3) + 1,
     });
   }
 
