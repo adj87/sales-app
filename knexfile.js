@@ -8,6 +8,7 @@ module.exports = {
       user: "root",
       password: "",
       database: "sales-app",
+      dateStrings: true,
     },
     migrations: {
       directory: path.join(__dirname, "knex/migrations"),
