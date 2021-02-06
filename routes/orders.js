@@ -35,26 +35,6 @@ router.get("/:orderId/type/:orderType", function (req, res, next) {
     })
     .catch((err) => res.status(500).json({ error: err.sqlMessage }));
 });
-router.put("/:orderId/type/:orderType", function (req, res, next) {
-  console.log("haloooooooooooooooooooooooooo", id);
-  const { body } = req;
-  const { orderId: id, orderType: type } = req.params;
-  let { order_lines, id, ...order } = body;
-
-
-    return knex
-    .transaction(async function (trx) {
-      await trx("orders").where({ id, type }).update(order);
-      await trx("order_lines").where({ order_id: id, order_type: type }).del();
-      await trx("order_lines").insert(order_lines);
-    })
-    .then(function () {
-      res.send({ success: true });
-    })
-    .catch(function (e) {
-      res.status(500).json({ success: false });
-    });
-});
 
 router.post("/", function (req, res, next) {
   const { body } = req;
@@ -72,6 +52,26 @@ router.post("/", function (req, res, next) {
           }));
           return trx("order_lines").insert(order_lines);
         });
+    })
+    .then(function () {
+      res.send({ success: true });
+    })
+    .catch(function (e) {
+      res.status(500).json({ success: false });
+    });
+});
+
+router.put("/:orderId/type/:orderType", function (req, res, next) {
+  const { body } = req;
+  const { orderId: id, orderType: type } = req.params;
+  let { order_lines, ...order } = body;
+  console.log(id, type);
+
+  return knex
+    .transaction(async function (trx) {
+      await trx("orders").where({ id, type }).update(order);
+      await trx("order_lines").where({ order_id: id, order_type: type }).del();
+      await trx("order_lines").insert(order_lines);
     })
     .then(function () {
       res.send({ success: true });
