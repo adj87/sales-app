@@ -54,10 +54,10 @@ router.post("/", function (req, res, next) {
         });
     })
     .then(function () {
-      res.send({ success: true });
+      res.send({ success: true, info: "Order created successfully" });
     })
     .catch(function (e) {
-      res.status(500).json({ success: false });
+      res.status(500).json({ success: false, info: "Something went wrong" });
     });
 });
 
@@ -65,7 +65,6 @@ router.put("/:orderId/type/:orderType", function (req, res, next) {
   const { body } = req;
   const { orderId: id, orderType: type } = req.params;
   let { order_lines, ...order } = body;
-  console.log(id, type);
 
   return knex
     .transaction(async function (trx) {
@@ -74,10 +73,10 @@ router.put("/:orderId/type/:orderType", function (req, res, next) {
       await trx("order_lines").insert(order_lines);
     })
     .then(function () {
-      res.send({ success: true });
+      res.send({ success: true, info: "Order edited successfully" });
     })
     .catch(function (e) {
-      res.status(500).json({ success: false });
+      res.status(500).json({ success: false, info: "Something went wrong" });
     });
 });
 
