@@ -14,13 +14,15 @@ router.get("/", function (req, res, next) {
 });
 
 /* GET users listing by orderId and orderType */
-router.get("customers/:id?", function (req, res, next) {
+router.get("/:id?", function (req, res, next) {
   const { id } = req.params;
+  console.log("yeahhhhhhh", id);
   knex
     .select("*")
-    .from("orders")
-    .where({ id: orderId })
-    .then((res) => res)
+    .from("customers")
+    .where({ id })
+    .first()
+    .then((data) => res.json(data))
     .catch((err) => res.status(500).json({ error: err.sqlMessage }));
 });
 

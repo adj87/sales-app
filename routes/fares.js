@@ -40,19 +40,33 @@ router.post("/", (req, res, next) => {
     .insert(req.body.fare_lines)
     .then((data) => {
       console.log("aqui la tienes", data);
-      return res.json({ success: true, data: req.body });
+      return res.json({
+        success: true,
+        data: req.body,
+        info: "Fare created succesfully",
+      });
     })
     .catch((err) => console.log("el err", err));
 });
 
-router.put("/:customerId", (req, res, next) => {
-  const { customerId } = req.params;
-  console.log(req);
-  knex("fares")
-    .where("customer_id", customerId)
-    .del()
-    .then(() => {
-      knex("fares").insert();
+router.put("/customerId/:customerId/", (req, res, next) => {
+  const { customerId: customer_id } = req.params;
+  const fare = req.body;
+  const { fare_lines } = fare;
+  return knex
+    .transaction(async function (trx) {
+      await trx("fares").where({ customer_id }).del();
+      await trx("fares").insert(fare_lines);
+    })
+    .then(function () {
+      res.send({
+        success: true,
+        info: "Fare edited successfully",
+        data: fare,
+      });
+    })
+    .catch(function (e) {
+      res.status(500).json({ success: false, info: "Something went wrong" });
     });
 });
 
