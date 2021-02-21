@@ -80,4 +80,21 @@ router.put("/:orderId/type/:orderType", function (req, res, next) {
     });
 });
 
+router.delete("/:orderId/type/:orderType", function (req, res, next) {
+  const { body } = req;
+  let { orderId: id, orderType: type } = req.params;
+  id = parseInt(id);
+  return knex
+    .transaction(async function (trx) {
+      await trx("orders").where({ id, type }).del();
+      await trx("order_lines").where({ order_id: id, order_type: type }).del();
+    })
+    .then(function () {
+      res.send({ success: true, info: "Order delete successfully" });
+    })
+    .catch(function (e) {
+      res.status(500).json({ success: false, info: "Something went wrong" });
+    });
+});
+
 module.exports = router;
