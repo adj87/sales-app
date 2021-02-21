@@ -1,7 +1,7 @@
 exports.up = function (knex) {
   return knex.schema
     .createTable("customers", function (table) {
-      table.increments("id");
+      table.string("id").primary();
       table.string("name").notNullable();
       table.string("address").notNullable();
       table.string("fiscal_id").notNullable();
@@ -31,8 +31,7 @@ exports.up = function (knex) {
         .inTable("products")
         .onDelete("CASCADE");
       table
-        .integer("customer_id")
-        .unsigned()
+        .string("customer_id")
         .references("id")
         .inTable("customers")
         .onDelete("CASCADE");
@@ -62,8 +61,8 @@ exports.up = function (knex) {
       table.float("total");
       table.boolean("is_surcharge").defaultTo(false);
       table
-        .integer("customer_id")
-        .unsigned()
+        .string("customer_id")
+        
         .references("id")
         .inTable("customers")
         .onDelete("CASCADE");

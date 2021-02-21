@@ -6,7 +6,7 @@ exports.seed = function (knex, Promise) {
   const numberOfRegisters = 1000;
   for (var i = 0; i < numberOfRegisters; i++) {
     customers.push({
-      id: i + 1,
+      id: String(i + 1),
       name: escape_quotes(faker.name.findName()),
       address: escape_quotes(faker.address.city()),
       fiscal_id: faker.random.number().toString(),

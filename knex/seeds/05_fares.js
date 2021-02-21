@@ -31,7 +31,7 @@ exports.seed = function (knex, Promise) {
       });
       products.forEach((el) => {
         fares.push({
-          customer_id: 1001,
+          customer_id: "1001",
           customer_name: "REPARTO",
           product_id: el.id,
           product_name: el.name,
