@@ -6,7 +6,7 @@ exports.seed = function (knex, Promise) {
   const numberOfRegisters = 60;
   for (var i = 0; i < numberOfRegisters; i++) {
     products.push({
-      id: i + 1,
+      id: String(i + 1),
       name: `Producto ${i}`,
       cost: 0.12,
       green_point_amount: (faker.random.number(20) + 1) / 100,

@@ -23,8 +23,8 @@ exports.seed = function (knex, Promise) {
         total_surcharge: 5 * i,
         total_taxes: 5 * i * 0.21,
         total: 5 * i * 1.21,
-        is_surcharge: faker.random.boolean(),
-        is_green_point: randomCustomer.green_point,
+        is_surcharge: randomCustomer.is_surcharge,
+        is_green_point: randomCustomer.is_green_point,
         customer_route_id: faker.random.number(6),
         type: faker.random.arrayElements[("A", "B")],
       });

@@ -15,7 +15,7 @@ exports.up = function (knex) {
     })
 
     .createTable("products", function (table) {
-      table.increments("id");
+      table.string("id").primary();
       table.string("name").notNullable();
       table.integer("cost").notNullable();
       table.float("green_point_amount").notNullable();
@@ -25,8 +25,7 @@ exports.up = function (knex) {
 
     .createTable("fares", function (table) {
       table
-        .integer("product_id")
-        .unsigned()
+        .string("product_id")
         .references("id")
         .inTable("products")
         .onDelete("CASCADE");
@@ -78,8 +77,7 @@ exports.up = function (knex) {
       table.enu("order_type", ["A", "B", "C"]).defaultTo("A");
       table.integer("line_number");
       table
-        .integer("product_id")
-        .unsigned()
+        .string("product_id")
         .references("id")
         .inTable("products")
         .onDelete("CASCADE");
