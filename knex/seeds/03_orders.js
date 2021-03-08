@@ -2,7 +2,7 @@ const faker = require("faker");
 escape_quotes = require("escape-quotes");
 exports.seed = function (knex, Promise) {
   let orders = [];
-  const numberOfRegisters = 2;
+  const numberOfRegisters = 500;
 
   return knex("customers").then((customers) => {
     const customersLength = customers.length;
@@ -14,6 +14,7 @@ exports.seed = function (knex, Promise) {
         id: i + 1,
         customer_id: randomCustomer.id,
         customer_name: randomCustomer.name,
+        route_id: randomCustomer.route_id,
         address: randomCustomer.address,
         fiscal_id: randomCustomer.fiscal_id,
         zip_code: randomCustomer.zip_code,
@@ -25,7 +26,6 @@ exports.seed = function (knex, Promise) {
         total: 5 * i * 1.21,
         is_surcharge: randomCustomer.is_surcharge,
         is_green_point: randomCustomer.is_green_point,
-        customer_route_id: faker.random.number(6),
         type: faker.random.arrayElements[("A", "B")],
       });
     }

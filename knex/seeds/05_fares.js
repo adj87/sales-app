@@ -7,11 +7,17 @@ exports.seed = function (knex, Promise) {
   return knex("customers").then((customers) => {
     return knex("products").then((products) => {
       customers.forEach((customer) => {
-        const isCustomerIncludedInList = [1, 2, 3, 4, 5, 6, 90].includes(
-          customer.id
-        );
+        const isCustomerIncludedInList = [
+          "1",
+          "2",
+          "3",
+          "4",
+          "5",
+          "6",
+          "90",
+        ].includes(customer.id);
         if (isCustomerIncludedInList) {
-          //CREATE A RANDOM LIST OF DIFFERENT FARES ONLY FOR A FEW CUSTOMERS AND NOT FOR ALL, NOT TO COLLAPSE THE TABLE
+          //CREATE A RANDOM LIST OF DIFFERENT FARES ONLY FOR A FEW CUSTOMERS AND NOT FOR AL"L", NOT TO COLLAPSE THE TABLE
           for (var i = 0; i < 3; i++) {
             const randomProduct = utils.getRandomItemOfArray(products);
             fares.push({

@@ -15,7 +15,7 @@ router.get("/", function (req, res, next) {
 
 /* GET fares listing by customerId */
 router.get("/:customerId", function (req, res, next) {
-  const { customerId :customer_id  } = req.params;
+  const { customerId: customer_id } = req.params;
   knex
     .select("*")
     .from("fares")
@@ -38,14 +38,15 @@ router.post("/", (req, res, next) => {
   return knex("fares")
     .insert(req.body.fare_lines)
     .then((data) => {
-      console.log("aqui la tienes", data);
       return res.json({
         success: true,
         data: req.body,
         info: "Fare created succesfully",
       });
     })
-    .catch((err) => console.log("el err", err));
+    .catch((err) =>
+      res.status(500).json({ success: false, info: "Something went wrong" })
+    );
 });
 
 router.put("/customerId/:customerId/", (req, res, next) => {
@@ -63,6 +64,19 @@ router.put("/customerId/:customerId/", (req, res, next) => {
         info: "Fare edited successfully",
         data: fare,
       });
+    })
+    .catch(function (e) {
+      res.status(500).json({ success: false, info: "Something went wrong" });
+    });
+});
+
+router.delete("/:customerId", (req, res, next) => {
+  const { customerId: customer_id } = req.params;
+  return knex("fares")
+    .where({ customer_id })
+    .del()
+    .then(function () {
+      res.send({ success: true, info: "Fare delete successfully" });
     })
     .catch(function (e) {
       res.status(500).json({ success: false, info: "Something went wrong" });
