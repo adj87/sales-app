@@ -26,11 +26,26 @@ exports.up = function (knex) {
 
       .createTable("products", function (table) {
         table.string("id").primary();
+        table.string("code_bar").notNullable();
         table.string("name").notNullable();
         table.integer("cost").notNullable();
         table.float("green_point_amount").notNullable();
         table.integer("units_per_box").notNullable();
         table.float("capacity");
+        table.integer("height");
+        table.integer("weight");
+
+        table.float("box_width");
+        table.float("box_height");
+        table.float("box_length");
+        table.float("box_weight");
+        table.float("box_capacity");
+
+        table.integer("pallet_boxes");
+        table.integer("pallet_base");
+        table.float("pallet_weight");
+        table.float("pallet_capacity");
+        table.float("pallet_height");
       })
 
       /**
