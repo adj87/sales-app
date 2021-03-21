@@ -34,6 +34,7 @@ exports.up = function (knex) {
         table.float("capacity");
         table.integer("height");
         table.integer("weight");
+        table.boolean("is_deprecated");
 
         table.float("box_width");
         table.float("box_height");
