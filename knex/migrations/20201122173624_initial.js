@@ -32,8 +32,7 @@ exports.up = function (knex) {
         table.float("green_point_amount").notNullable();
         table.integer("units_per_box").notNullable();
         table.float("capacity");
-        table.integer("height");
-        table.integer("weight");
+        table.float("weight");
         table.boolean("is_deprecated");
 
         table.float("box_width");
