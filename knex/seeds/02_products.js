@@ -5,7 +5,7 @@ exports.seed = function (knex, Promise) {
   let products = [];
   const numberOfRegisters = 60;
   for (var i = 0; i < numberOfRegisters; i++) {
-    const capacityAndWeight = faker.random.float(3) + 1;
+    const capacityAndWeight = Math.random() * 2;
     const palletBoxes = faker.random.number(40) + 1;
     const unitsPerBox = faker.random.number(19) + 1;
 
