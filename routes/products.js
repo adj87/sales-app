@@ -11,4 +11,15 @@ router.get("/", function (req, res, next) {
     .catch((err) => res.status(500).json({ error: err.sqlMessage }));
 });
 
+router.get("/:id?", function (req, res, next) {
+  const { id } = req.params;
+  knex
+    .select("*")
+    .from("products")
+    .where({ id })
+    .first()
+    .then((data) => res.json(data))
+    .catch((err) => res.status(500).json({ error: err.sqlMessage }));
+});
+
 module.exports = router;
