@@ -10,14 +10,18 @@ exports.up = function (knex) {
         table.string("name").notNullable();
         table.string("address").notNullable();
         table.string("fiscal_id").notNullable();
+        table.string("route_id").notNullable();
         table.string("zip_code").notNullable();
         table.string("email");
         table.string("phone");
         table.boolean("is_green_point").defaultTo(true);
         table.boolean("is_surcharge").defaultTo(false);
-        table.string("route_id").notNullable();
         table.timestamp("created_at").defaultTo(knex.fn.now());
         table.timestamp("updated_at").defaultTo(knex.fn.now());
+        table.boolean("is_deprecated").defaultTo(true);
+        table.string("town");
+        table.string("province");
+        table.string("method_of_payment");
       })
 
       /**
