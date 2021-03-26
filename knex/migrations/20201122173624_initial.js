@@ -125,6 +125,7 @@ exports.up = function (knex) {
         table.float("cost");
         table.integer("quantity");
         table.integer("taxes_rate");
+        table.integer("pallet_boxes");
         table.float("surcharge_amount");
         table.float("green_point_amount");
       })
