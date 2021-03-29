@@ -21,7 +21,7 @@ exports.seed = function (knex, Promise) {
             product_id: randomProduct.id,
             product_name: randomProduct.name,
             pallet_boxes: randomProduct.pallet_boxes,
-            capacity:randomProduct.capacity,
+            capacity: randomProduct.capacity,
             units_per_box,
             price,
             cost,

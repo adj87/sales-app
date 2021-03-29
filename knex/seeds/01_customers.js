@@ -10,7 +10,7 @@ exports.seed = function (knex, Promise) {
       name: escape_quotes(faker.name.findName()),
       address: escape_quotes(faker.address.streetName()),
       fiscal_id: faker.random.number().toString(),
-      route_id: faker.random.number(8).toString(),
+      route_id: ["1a", "2a", "3b"][Math.floor(Math.random() * 3)],
       zip_code: faker.address.zipCode(),
       email: faker.internet.email(),
       phone: faker.phone.phoneNumber(),
@@ -20,9 +20,7 @@ exports.seed = function (knex, Promise) {
       updated_at: faker.date.soon(),
       town: faker.address.city(),
       province: faker.address.county(),
-      method_of_payment: ["CO", "AS", "90", "30", "60"][
-        Math.floor(Math.random() * 5)
-      ],
+      method_of_payment: ["CO", "30", "60"][Math.floor(Math.random() * 3)],
     });
   }
   customers.push({
