@@ -73,7 +73,6 @@ router.get("/routes", function (req, res, next) {
 });
 
 router.get("/payments-methods", function (req, res, next) {
-  console.log("yeahhhhhh");
   const methods = [
     { id: "CO", name: "Contado" },
     { id: "30", name: "Pagaré 30 días" },

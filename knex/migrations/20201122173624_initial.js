@@ -14,6 +14,7 @@ exports.up = function (knex) {
         table.string("zip_code").notNullable();
         table.string("email");
         table.string("phone");
+        table.string("agent_id");
         table.boolean("is_green_point").defaultTo(true);
         table.boolean("is_surcharge").defaultTo(false);
         table.timestamp("created_at").defaultTo(knex.fn.now());
@@ -96,6 +97,8 @@ exports.up = function (knex) {
         table.float("total_surcharge");
         table.float("total_taxes");
         table.float("total");
+        table.string("province");
+        table.string("town");
         table.boolean("is_surcharge").defaultTo(false);
         table
           .string("customer_id")

@@ -15,6 +15,8 @@ exports.seed = function (knex, Promise) {
         customer_id: randomCustomer.id,
         customer_name: randomCustomer.name,
         route_id: randomCustomer.route_id,
+        province: randomCustomer.province,
+        town: randomCustomer.town,
         address: randomCustomer.address,
         fiscal_id: randomCustomer.fiscal_id,
         zip_code: randomCustomer.zip_code,
