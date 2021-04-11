@@ -63,6 +63,19 @@ router.put("/:id", function (req, res, next) {
     });
 });
 
+router.delete("/:customerId", (req, res, next) => {
+  const { customerId: customer_id } = req.params;
+  return knex("customers")
+    .where({ id:customer_id })
+    .del()
+    .then(function () {
+      res.send({ success: true, info: "Customer delete successfully" });
+    })
+    .catch(function (e) {
+      res.status(500).json({ success: false, info: "Something went wrong" });
+    });
+});
+
 router.get("/routes", function (req, res, next) {
   const routes = [
     { id: "1a", name: "Sierra parte A" },
