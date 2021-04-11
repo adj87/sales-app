@@ -14,6 +14,8 @@ exports.seed = function (knex, Promise) {
       zip_code: faker.address.zipCode(),
       email: faker.internet.email(),
       phone: faker.phone.phoneNumber(),
+      phone_2: faker.phone.phoneNumber(),
+      phone_mobile: faker.phone.phoneNumber(),
       is_green_point: faker.random.boolean(),
       agent_id: "017",
       is_surcharge: faker.random.boolean(),

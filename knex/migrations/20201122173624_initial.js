@@ -14,6 +14,8 @@ exports.up = function (knex) {
         table.string("zip_code").notNullable();
         table.string("email");
         table.string("phone");
+        table.string("phone_2");
+        table.string("phone_mobile");
         table.string("agent_id");
         table.boolean("is_green_point").defaultTo(true);
         table.boolean("is_surcharge").defaultTo(false);

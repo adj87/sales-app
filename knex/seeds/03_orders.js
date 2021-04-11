@@ -18,6 +18,7 @@ exports.seed = function (knex, Promise) {
         province: randomCustomer.province,
         town: randomCustomer.town,
         address: randomCustomer.address,
+        shipping_place: randomCustomer.address,
         fiscal_id: randomCustomer.fiscal_id,
         zip_code: randomCustomer.zip_code,
         date: faker.date.past(),
